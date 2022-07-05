@@ -1,6 +1,7 @@
 package web.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,10 +49,14 @@ public class SignupServlet extends HttpServlet {
 				.build();
 		
 		try {
+			PrintWriter out = response.getWriter();
+			
 			if(userService.createUser(signupReqDto)) {
 				System.out.println("회원가입 성공");
+				out.print(true);
 			}else {
 				System.out.println("회원가입 실패");
+				out.print(false);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

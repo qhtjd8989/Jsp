@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import service.UserService;
 import service.UserServiceImpl;
 
-/**
- * Servlet implementation class CheckUsernameServlet
- */
 @WebServlet("/check/username")
 public class CheckUsernameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +26,7 @@ public class CheckUsernameServlet extends HttpServlet {
 		
 		response.setContentType("text/plain;charset=UTF-8");
 		try {
-			response.getWriter().print(userService.checkUsername(username));
+			response.getWriter().print(userService.checkUsername(username)); // getWriter는 응답용
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -60,7 +60,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findUserByUsername(String username) throws Exception {
-		User user = null;
+		User user = null; // try문에서 예외가 발생하면 return을 할 수 없기 때문에 밖으로 빼둠
 		
 		sql = "SELECT\r\n"
 				+ "	um.user_code,\r\n"
