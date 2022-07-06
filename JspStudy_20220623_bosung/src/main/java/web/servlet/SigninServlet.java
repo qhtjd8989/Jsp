@@ -2,12 +2,14 @@ package web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import domain.entity.User;
 import service.UserService;
@@ -43,6 +45,17 @@ public class SigninServlet extends HttpServlet {
 			if(user == null) {
 				out.print(false);
 			}else {
+				HttpSession session = request.getSession();
+				System.out.println("session id: " + session.getId()); // 세션 key값  서버에 처음 요청을 받았을 때 발급
+				System.out.println("session CreationTime: " + (new SimpleDateFormat("HH:mm:ss")).format(session.getCreationTime()));
+				System.out.println("session LastAccessedTime: " + (new SimpleDateFormat("HH:mm:ss")).format(session.getLastAccessedTime()));
+
+				// 세션의 만료시간 설정
+//				session.setMaxInactiveInterval(30); // 초단위
+				
+				// 세션에 값 저장하는 방법
+				session.setAttribute("principal", user);
+				
 				out.print(true);
 			}
 		}
