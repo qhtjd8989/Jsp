@@ -1,0 +1,42 @@
+package config;
+
+import domain.dao.UserDao;
+import domain.dao.UserDaoImpl;
+import lombok.Getter;
+import service.UserService;
+import service.UserServiceImpl;
+
+@Getter
+public class ServletContextConfig {
+	private static ServletContextConfig instance = null;
+	
+	/*
+	 * Custom IoC (객체관리)
+	 */
+	
+	// Service
+	private UserService userService;
+	
+	//Repository
+	private UserDao userDao;
+	
+	private ServletContextConfig() {}
+	
+	public static ServletContextConfig getInstance() {
+		if(instance == null) {
+			instance = new ServletContextConfig();
+			instance.setIoC();
+		}
+		
+		return instance;
+	}
+	
+	private void setIoC() {
+		if(instance.userDao == null) {
+			instance.userDao = new UserDaoImpl();
+		}
+		if(instance.userService == null) {
+			 instance.userService= new UserServiceImpl();
+		}
+	}
+}
