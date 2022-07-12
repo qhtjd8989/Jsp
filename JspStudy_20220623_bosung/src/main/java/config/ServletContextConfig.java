@@ -14,11 +14,11 @@ public class ServletContextConfig {
 	 * Custom IoC (객체관리)
 	 */
 	
-	// Service
-	private UserService userService;
-	
 	//Repository
 	private UserDao userDao;
+	
+	// Service
+	private UserService userService;
 	
 	private ServletContextConfig() {}
 	
@@ -35,6 +35,7 @@ public class ServletContextConfig {
 		if(instance.userDao == null) {
 			instance.userDao = new UserDaoImpl();
 		}
+		
 		if(instance.userService == null) {
 			 instance.userService= new UserServiceImpl();
 		}
